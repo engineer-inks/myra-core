@@ -1,145 +1,99 @@
-import importlib
+import abc
 import logging
-from typing import Dict, Any, Union, Optional, Type, Tuple
+import os
+from typing import Dict, Optional
 
-PROTOCOL_SEP = '://'
+from . import consts
 
-
-def _assert_known_protocol(protocol, known_protocols):
-    if protocol not in known_protocols:
-        available = ', '.join(known_protocols)
-        raise ValueError(f'Protocol scheme `{protocol}` is not supported. '
-                         f'Available protocols are: {available}.')
+C = Dict[str, str]
 
 
-def adapter(protocol: str,
-            adapters: Dict[str, Any],
-            adapters_available: Dict[str, str]):
-    """Retrieve the appropriate adapter for a given protocol.
-
-    If the adapter is not found in the :attr:`adapters` pool, its class will
-    be fetched from :attr:`adapters_available`, instantiated and added to the pool.
-    No adapter (nor its module) will be imported into the program's memory unless
-    necessary. This allows us to clip dependencies for sources we are not using,
-    as no direct references are pointed.
-    Example: a project that only runs locally can safely remove the
-    `google-cloud-storage` dependency and still work, as the GoogleStorageAdapter
-    will never be imported.
-
-    Parameters
-    ----------
-    protocol: str
-        the protocol of interest
-    adapters: dict of adapters started
-    adapters_available: dict of paths to adapters registered
-
-    Returns
-    -------
-    Adapter
-        Storage or stream adapter
-    """
-    if protocol not in adapters:
-        _assert_known_protocol(protocol, adapters_available)
-
-        module, cls = adapters_available[protocol]
-        module = importlib.import_module(module, __package__)
-        cls = getattr(module, cls)
-        adapters[protocol] = cls()
-    return adapters[protocol]
+def default_env_path(target: str, env: str) -> str:
+    return os.path.join(target, 'config', env)
 
 
-def split_protocol_path(location: str) -> Tuple[str, str]:
-    """Separates and returns protocol and path from a location.
+def default_env_file(target: str, env: str) -> str:
+    return os.path.join(default_env_path(target, env), '.env')
 
-    Parameters
-    ----------
-    location : str
-        A valid URI with format ``[protocol://]path``. If ``protocol://`` is not present, ``file://`` is inferred.
 
-    Returns
-    -------
-    protocol : str
-    path : str
+def load_config(env_file: str) -> C:
+    if not os.path.exists(env_file):
+        raise RuntimeError(f'Cannot load env file {env_file}.\nMake sure '
+                           f'your current directory is a valid project.')
+
+    with open(env_file) as f:
+        ls = f.readlines()
+
+    ls = [l.strip() for l in ls]
+    ls = [l for l in ls if l and not l.startswith('#')]
+    parts = [l.split('=') for l in ls]
+    config = {k: '='.join(v) for k, *v in parts}
+
+    return config
+
+
+def assert_is_dna_project(target):
+    if not os.path.exists(os.path.join(target, 'dextra', 'dna')):
+        raise RuntimeError('DnA project not found.\nMake sure your '
+                           'current directory is a valid project.')
+
+
+def context(env) -> C:
+    """Retrieve the project's current context, based on an environment.
 
     """
-    parts = location.split(PROTOCOL_SEP)
+    target = os.getcwd()
 
-    if len(parts) > 2:
-        raise ValueError(f'Malformed location "{location}".')
+    env_path = default_env_path(target, env)
+    env_file = default_env_file(target, env)
 
-    if len(parts) == 1:
-        return 'file', location
+    c = load_config(env_file)
+    c.update(_ENV_PATH=env_path,
+             _ENV_FILE=env_file,
+             _TARGET=target,
+             _CORE_REPO=consts.CORE_REPO,
+             _ARCH_REPO=consts.ARCH_REPO)
 
-    protocol, path = parts
-    return protocol, path
-
-
-def without_protocol(location: str) -> str:
-    """Returns a location without its associated protocol.
-
-    Parameters
-    ----------
-    location : str
-        A valid URI with format ``[protocol://]path``
-
-    Returns
-    -------
-    str
-
-    """
-    return split_protocol_path(location)[-1]
+    return c
 
 
-def join_protocol_path(protocol: str, location: str) -> str:
-    """Joins a protocol and some location.
+class Runner(metaclass=abc.ABCMeta):
+    def __init__(self, config: C):
+        self.config = config
 
-    Parameters
-    ----------
-    protocol : str
-    location : str
+    def execute(self,
+                command: str,
+                log_contextualized: bool = False,
+                **context):
+        command_c = self.contextualized(command, context)
+        logging.info(f'Running `{command_c if log_contextualized else command}`')
 
-    Returns
-    -------
-    str
-        A location with format ``protocol://path``, where ``path`` is the given location with its protocol removed, if
-        it has any.
+        if command is NotImplemented:
+            raise NotImplementedError(f'Command was not implemented for '
+                                      f'`{type(self).__name__}` backend.')
 
-    """
-    return f'{protocol}://{without_protocol(location)}'
+        return os.system(command_c)
 
-
-# region error handling
-
-ON_ERROR_HANDLERS = ('raise', 'log')
+    def contextualized(self, command, context=None):
+        c = {**self.config, **(context or {})}
+        return command.format(**c)
 
 
-def handle_error(error: Union[Exception, str],
-                 on_error: str = 'raise',
-                 wrapper_cls: Optional[Type[Exception]] = None):
-    """Raises or logs occurring errors based on the caller choice.
+# region Artifacts related tasks
 
-    :param error: the error that occurred
-    :type error: Exception, str
-    :param on_error: how to handle the error (raise, log or ignore)
-    :type on_error: str
-    :param wrapper_cls: an exception class to wrap around the error.
-                        This is useful whenever you want to merge
-                        errors from multiple backends into a single
-                        base error.
-    :type wrapper_cls: Type[Exception]
-    """
-    if on_error == 'raise':
-        raise wrapper_cls(error) if wrapper_cls else error
+def safe_name(name):
+    return name.replace('-', '_')
 
-    if on_error == 'log':
-        return logging.error(error)
 
-    if on_error == 'ignore':
-        return
+def as_path(name: str,
+            directory: str,
+            suffix: Optional[str] = '.py'):
+    name = safe_name(name)
+    locations = (directory, f'./{directory}')
 
-    if on_error not in ON_ERROR_HANDLERS:
-        raise ValueError(f'`handle_error` function cannot understand '
-                         f'on_error="{on_error}". It should assume '
-                         f'one of the following values: {ON_ERROR_HANDLERS}.')
+    path, file = os.path.split(name)
+    return os.path.join(
+        path if path.startswith(locations) else os.path.join(directory, path),
+        file if not suffix or file.endswith(suffix) else file + suffix)
 
 # endregion

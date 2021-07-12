@@ -10,7 +10,7 @@ import pandas as pd
 from pyspark.sql import DataFrame
 from sklearn.datasets._base import get_data_home, RemoteFileMetadata, _fetch_remote
 
-from ..stream import read
+from ..stream import read, conform, merge
 
 from .. import utils
 
@@ -165,7 +165,7 @@ def genero_nomes(data_home=None,
     --------
     .. jupyter-execute::
 
-        import dextra.dna.text as T
+        import myra.dna.text as T
 
         T.datasets.genero_nomes().head()
 
@@ -225,3 +225,93 @@ def all_patterns():
                             .apply(utils.clean) + r'\b')
 
     return {'name': n, **COMMON_PATTERNS}
+
+def sklearn_ds(name: str, *args, **kwargs) -> DataFrame:
+    """Load Scikit-learn dataset from function name.
+
+    Parameters
+    ----------
+    name: Name of the function within :code:`sklearn.datasets`
+    args: Arguments passed to the building function
+    \**kwargs
+        Key arguments passed to the building function
+
+    Examples
+    --------
+    .. code-block:: python
+
+        import dextra.dna.core as C
+        C.datasets.iris().limit(5).toPandas()
+
+    """
+    import pandas as pd
+    from sklearn import datasets
+
+    x = getattr(datasets, name)(*args, **kwargs)
+    d = pd.DataFrame(x.data, columns=x.feature_names)
+
+    d['target'] = (x.target_names[x.target].astype(str)
+                   if hasattr(x, 'target_names')
+                   else x.target)
+
+    d = read(d)
+    d = conform(d)
+    d = merge(d)
+
+    return d
+
+
+def wine() -> DataFrame:
+    """Load the wine dataset from :code:`sklearn.datasets` as spark dataframe.
+
+    Examples
+    --------
+    .. jupyter-execute::
+
+        import dextra.dna.core as C
+        C.datasets.wine().limit(2).toPandas()
+
+    """
+    return sklearn_ds('load_wine')
+
+
+def iris() -> DataFrame:
+    """Load the iris dataset from :code:`sklearn.datasets` as spark dataframe.
+
+    Examples
+    --------
+    .. jupyter-execute::
+
+        import dextra.dna.core as C
+        C.datasets.iris().limit(2).toPandas()
+
+    """
+    return sklearn_ds('load_iris')
+
+
+def digits() -> DataFrame:
+    """Load the digits dataset from :code:`sklearn.datasets` as spark dataframe.
+
+    Examples
+    --------
+    .. jupyter-execute::
+
+        import dextra.dna.core as C
+        C.datasets.digits().limit(2).toPandas()
+
+    """
+    return sklearn_ds('load_digits')
+
+
+def boston() -> DataFrame:
+    """Load the iris dataset from :code:`sklearn.datasets` as spark dataframe.
+
+    Examples
+    --------
+    .. jupyter-execute::
+
+        import dextra.dna.core as C
+        C.datasets.boston().limit(2).toPandas()
+
+    """
+    return sklearn_ds('load_boston')
