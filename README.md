@@ -1,7 +1,8 @@
 # Data science Functions for myra-core
 
-
-
+[![CircleCI](https://circleci.com/gh/dextra/dna-core.svg?style=shield&circle-token=416684ff946282695aa8a56d1cf9cbae51fe7b96)](https://app.circleci.com/pipelines/github/myra-ink)
+[![Documentation](https://img.shields.io/badge/docs-0.5.0-orange.svg?style=flat-square)](https://app.circleci.com/pipelines/github/myra-ink)
+[![Python required version: 3.7](https://img.shields.io/badge/python-3.7-blue.svg?style=flat-square)](https://www.python.org/downloads/release/python-370)
 
 ---
 
