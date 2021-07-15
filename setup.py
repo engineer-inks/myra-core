@@ -17,9 +17,9 @@ setup(name='myra-core',
       url=INFO['url'],
       python_requires='>=3',
       entry_points={
-          'console_scripts': ['dna=myra.dna:main']
+          'console_scripts': ['dna=ink.core:main']
       },      
-      packages=find_packages(include=['myra.dna']),
+      packages=find_packages(include=['ink.core']),
       install_requires=[d for d in DEPENDENCIES if '://' not in d],
-      package_data={'myra.dna': ['templates/*']},
+      package_data={'ink.core': ['templates/*']},
       zip_safe=False)

@@ -12,8 +12,8 @@ from . import security
 
 
 _ADAPTERS_AVAILABLE = {
-    'file': ('config.local.class_config.adapters.file_system', 'FileSystemStorageAdapter'),
-    'gs': ('config.local.class_config.adapters.google_cloud', 'GoogleCloudStorageAdapter')
+    'file': ('ink.core.templates.adapters.file_system', 'FileSystemStorageAdapter'),
+    'gs': ('ink.core.templates.adapters.google_cloud', 'GoogleCloudStorageAdapter')
 }
 _ADAPTERS = {}
 

@@ -14,9 +14,9 @@ S = Union[S, List[S]]
 
 
 _ADAPTERS_AVAILABLE = {
-    'mem': ('myra.dna.templates.stream.adapters.memory', 'MemoryStreamAdapter'),
-    'file': ('myra.dna.templates.stream.adapters.file', 'FileStreamAdapter'),
-    'bigquery': ('myra.dna.templates.stream.adapters.big_query', 'BigQueryStreamAdapter')
+    'mem': ('ink.core.templates.stream.adapters.memory', 'MemoryStreamAdapter'),
+    'file': ('ink.core.templates.stream.adapters.file', 'FileStreamAdapter'),
+    'bigquery': ('ink.core.templates.stream.adapters.big_query', 'BigQueryStreamAdapter')
 }
 _ADAPTERS = {}
 

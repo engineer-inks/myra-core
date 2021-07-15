@@ -3,7 +3,7 @@
 .. jupyter-execute::
     :hide-code:
 
-    import dextra.dna.text as T
+    import ink.core.templates.text as T
 
     x = T.datasets.newsgroups20()
 
