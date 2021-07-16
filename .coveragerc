@@ -1,0 +1,15 @@
+[run]
+source = ink.core.templates
+include = ink.core.templates*
+branch = True
+
+[report]
+exclude_lines =
+	\.\.\.
+    pass
+    raise NotImplementedError
+    if __name__ == .__main__.:
+omit =
+    */tests/*
+    */python?.?/*
+    */site-packages/nose/*

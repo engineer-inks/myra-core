@@ -1,0 +1,19 @@
+version: '3'
+services:
+  text:
+    build:
+      context: .
+      args:
+        config_path: config/$ENV
+        base_image: jupyter/pyspark-notebook
+    user: root
+    image: dna/$SERVICE
+    working_dir: /opt/dna/$SERVICE
+    env_file:
+      - config/$ENV/.env
+    volumes:
+      - .:/opt/dna/text
+      - ./config/$ENV:/home/jovyan/dna
+      - ./datalake:/datalake
+      - ./datalake/scikit_learn_data:/home/jovyan/scikit_learn_data
+    entrypoint: ./config/$ENV/actions/run.sh
