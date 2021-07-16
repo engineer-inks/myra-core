@@ -1,0 +1,9 @@
+lakes:
+  transient: 'file:///datalake/test/transient'
+  raw: 'file:///datalake/test/raw'
+  trusted: 'file:///datalake/test/trusted'
+  refined: 'file:///datalake/test/refined'
+  models: 'file:///datalake/test/models'
+  backup: 'file:///datalake/test/backup'
+  secrets: 'file:///datalake/test/secrets'
+  config: 'file:///home/jovyan/dna'
