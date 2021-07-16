@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 import os
 
-from setuptools import setup, find_packages
+from setuptools import setup, find_namespace_packages
 
 PROJECT_DIR = os.path.dirname(__file__)
 
@@ -19,7 +19,7 @@ setup(name='myra-core',
       entry_points={
           'console_scripts': ['core=ink.core:main']
       },      
-      packages=find_packages(include=['ink.core']),
+      packages=find_namespace_packages(include=['ink.core.*']),
       install_requires=[d for d in DEPENDENCIES if '://' not in d],
       package_data={'ink.core': ['templates/*']},
       zip_safe=False)
