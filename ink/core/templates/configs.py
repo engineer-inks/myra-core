@@ -7,6 +7,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql.types import Row
 
 from . import utils
+import findspark
 
 
 def spark(mode='default') -> SparkSession:
@@ -26,6 +27,7 @@ def spark(mode='default') -> SparkSession:
                 .enableHiveSupport()
                 .getOrCreate())
     elif mode == 'deltalake':
+        findspark.init("/opt/conda/lib/python3.7/site-packages/pyspark")
         return SparkSession.builder \
                 .config("spark.jars.packages", "io.delta:delta-core_2.12:0.8.0") \
                 .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension") \
