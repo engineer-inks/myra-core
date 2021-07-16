@@ -19,6 +19,7 @@ def spark(mode='default') -> SparkSession:
     :return: SparkSession
     """
     if mode == 'default':
+        findspark.init()
         return SparkSession.builder.getOrCreate()
     elif mode == 'test':
         return (SparkSession.builder
@@ -27,6 +28,7 @@ def spark(mode='default') -> SparkSession:
                 .enableHiveSupport()
                 .getOrCreate())
     elif mode == 'deltalake':
+        findspark.init("/opt/conda/lib/python3.8/site-packages/pyspark")
         return SparkSession.builder \
                 .config("spark.jars.packages", "io.delta:delta-core_2.12:0.8.0") \
                 .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension") \
