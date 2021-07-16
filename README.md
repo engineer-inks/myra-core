@@ -22,9 +22,20 @@ pip install git+https://github.com/myra-ink/myra-core.git
 ## Usage
 
 ```shell
-dna create project PROJECT
-cd PROJECT
-dna build
-dna start  # A local jupyter server is now
-           # available at localhost:8086
+import ink.core.templates as T
+
+class Rawing(T.processors.Rawing):
+    def call(self, x):
+        x = self.hash_sensible_info(x, ('email', 'name'))
+        x = self.exclude_sensible_info(x, 'review')
+
+        return x
+
+class Refining(T.processors.Refining):
+    def call(self, x):
+        ws = T.datasets.HIGH_FRICTION_WORDS
+        x = self.infer_from_keywords(x, 'review', 'alarming', ws)
+        x = x.withColumn('sentiment', x.score / 5)
+
+        return x
 ```
