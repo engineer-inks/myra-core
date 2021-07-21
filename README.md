@@ -1,9 +1,8 @@
-# Data science Functions for myra-core
+# Data science Functions for Modelos NLP - Project Myra-Core
 
-
-
-
----
+[![CircleCI](https://circleci.com/gh/dextra/dna-core.svg?style=shield&circle-token=416684ff946282695aa8a56d1cf9cbae51fe7b96)](https://app.circleci.com/pipelines/github/myra-ink)
+[![Documentation](https://img.shields.io/badge/docs-0.5.0-orange.svg?style=flat-square)](https://github.com/myra-ink/myra-core)
+[![Python required version: 3.7](https://img.shields.io/badge/python-3.7-blue.svg?style=flat-square)](https://www.python.org/downloads/release/python-370)
 
 A very lightweight (python) almost-dependency-free util for DnA.
 Used to bootstrap projects and infrastructure.
@@ -23,20 +22,11 @@ pip install git+https://github.com/myra-ink/myra-core.git
 core create project PROJECT
 cd PROJECT
 core build
+
 core start  # A local jupyter server is now
-
-```
-```
-
-```
-```
-
-```
-```
-
 available at localhost:8086
 
-### Import Lib core
+### Import Lib Core
 
 ```shell
 import ink.core.templates as T
