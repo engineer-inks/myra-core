@@ -1,6 +1,7 @@
 import os
 
 CORE_REPO = 'git@github.com:myra-ink/myra-core.git'
+ARCH_REPO = 'git@github.com:myra-ink/myra-core.git'
 
 DEPS = (
     ('myra_core', CORE_REPO, 'CORE_VERSION'),
