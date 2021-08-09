@@ -5,7 +5,10 @@ ARG config_path
 
 LABEL maintainer="ink@myrabr.com"
 
-ADD lib/wheels wheels
+# ADD lib/wheels wheels
+# RUN pip install ./wheels/*
+
+ADD dist wheels
 RUN pip install ./wheels/*
 
 ADD requirements.txt .
