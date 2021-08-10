@@ -4,8 +4,8 @@ from unittest import TestCase
 
 from pyspark.sql import SparkSession, DataFrame, Column, functions as F
 
-from . import configs
-from .configs import Config
+from ink.core.templates.configs import Config
+from ink.core.templates import configs
 from .utils import to_list
 
 

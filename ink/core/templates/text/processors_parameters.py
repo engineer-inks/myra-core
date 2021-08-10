@@ -1,6 +1,5 @@
 """Describe The Different Processor Classes.
 """
-
 import abc
 import logging
 from typing import List, Optional, Union, Dict
@@ -8,9 +7,8 @@ from typing import List, Optional, Union, Dict
 from pyspark.sql import functions as F
 
 from .. import security, models
-from ..text import configs
 from ..stream import read, write
-
+from ink.core.templates import configs
 from ..utils import to_list, stopwatch, NamedEntityMixin
 
 I = Union[str, F.DataFrame, Dict[str, F.DataFrame]]

@@ -4,7 +4,7 @@ from pyspark.ml.param.shared import HasInputCol, HasOutputCol, Param
 from pyspark.ml.util import DefaultParamsWritable, DefaultParamsReadable
 from pyspark.sql import functions as F, types as T
 
-from ..configs import spark
+from ink.core.templates.configs import spark
 from ..utils import stem
 
 
