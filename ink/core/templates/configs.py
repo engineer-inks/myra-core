@@ -7,7 +7,6 @@ from pyspark.sql import SparkSession
 from pyspark.sql.types import Row
 
 from . import utils
-# import findspark
 
 
 def spark(mode='default') -> SparkSession:
@@ -19,7 +18,6 @@ def spark(mode='default') -> SparkSession:
     :return: SparkSession
     """
     if mode == 'default':
-    #    findspark.init()
         return SparkSession.builder.getOrCreate()
     elif mode == 'test':
         return (SparkSession.builder
@@ -28,11 +26,11 @@ def spark(mode='default') -> SparkSession:
                 .enableHiveSupport()
                 .getOrCreate())
     elif mode == 'deltalake':
-    #    findspark.init("/opt/conda/lib/python3.8/site-packages/pyspark")
         return SparkSession.builder \
-                .config("spark.jars.packages", "io.delta:delta-core_2.12:0.8.0") \
-                .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension") \
-                .config("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog") \
+            .config("spark.jars.packages", "io.delta:delta-core_2.12:0.7.0") \
+            .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension") \
+            .config("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog") \
+            .config("spark.databricks.delta.schema.autoMerge.enabled", "true") \
             .getOrCreate()
     else:
         raise ValueError(f'Illegal value "{mode}" mode parameter. '
@@ -56,7 +54,7 @@ class Config:
     --------
     .. jupyter-execute::
 
-        from myra.processors.configs_setup import Config
+        from dextra.dna.core import Config
         config = Config('local')
         config.lakes.transient
 
