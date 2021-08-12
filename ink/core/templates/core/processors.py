@@ -1,15 +1,15 @@
 """Describe The Different Processor Classes.
 """
+
 import abc
 import logging
 from typing import List, Optional, Union, Dict
 
 from pyspark.sql import functions as F
 
-from .. import security, models
-from ..stream import read, write
+from ink.core.templates.core import models, io, security
 from ink.core.templates import configs
-from ..utils import to_list, stopwatch, NamedEntityMixin
+from .utils import to_list, stopwatch, NamedEntityMixin
 
 I = Union[str, F.DataFrame, Dict[str, F.DataFrame]]
 
@@ -167,7 +167,7 @@ class Processor(NamedEntityMixin, metaclass=abc.ABCMeta):
         inputs = (self.inputs
                 if isinstance(self.inputs, dict)
                 else {'inputs': self.inputs})
-        self.loaded = {k: read(v)
+        self.loaded = {k: io.stream.read(v)
                     for k, v in inputs.items()}
 
         return self
@@ -178,7 +178,7 @@ class Processor(NamedEntityMixin, metaclass=abc.ABCMeta):
         self._ensure_processed()
         
         with stopwatch(f'{self.fullname()} saving', mode='silent') as w:
-            write(self.processed,
+            io.stream.write(self.processed,
                             self.outputs,
                             **self.SAVING_OPTIONS)
         

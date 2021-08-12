@@ -6,7 +6,7 @@ import pandas as pd
 from pyspark.sql import functions as F
 
 from .stream_adapter import StreamAdapter
-from ...configs import spark
+from ink.core.templates.configs import spark
 
 
 def _warn_unused_filename(filename):

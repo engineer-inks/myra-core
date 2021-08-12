@@ -10,7 +10,7 @@ import pandas as pd
 from pyspark.sql import DataFrame
 from sklearn.datasets._base import get_data_home, RemoteFileMetadata, _fetch_remote
 
-from ..stream import read, conform, merge
+from ink.core.templates.core.io.stream import read, conform, merge
 
 from .. import utils
 
@@ -268,7 +268,7 @@ def wine() -> DataFrame:
     --------
     .. jupyter-execute::
 
-        import dextra.dna.core as C
+        import myra.dna.core as C
         C.datasets.wine().limit(2).toPandas()
 
     """
@@ -282,7 +282,7 @@ def iris() -> DataFrame:
     --------
     .. jupyter-execute::
 
-        import dextra.dna.core as C
+        import myra.dna.core as C
         C.datasets.iris().limit(2).toPandas()
 
     """
@@ -310,7 +310,7 @@ def boston() -> DataFrame:
     --------
     .. jupyter-execute::
 
-        import dextra.dna.core as C
+        import myra.dna.core as C
         C.datasets.boston().limit(2).toPandas()
 
     """

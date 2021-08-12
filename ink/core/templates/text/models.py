@@ -9,8 +9,8 @@ from pyspark.ml.pipeline import Pipeline, PipelineModel
 from sklearn.model_selection import GridSearchCV
 from sklearn.pipeline import Pipeline as SkPipeline
 
-from ..stream import merge
-from ..models import base
+from ink.core.templates.core.io.stream import merge
+from ink.core.templates.core.models import base
 
 from . import transformers, utils
 
@@ -134,20 +134,22 @@ def explain(model,
             vocabulary: Union[PipelineModel, List[str]],
             terms: int = 16,
             **kwargs):
-    """Generate a report that explains the model's behavior.
+    '''
+    Generate a report that explains the model's behavior.
 
     :param model:      the model that should be explained.
     :param vocabulary: the vocabulary mapping words (or bi-grams, tri-grams) to the feature-vector-space
                        by the TF-IDF algorithm. If a pipeline is passed, we search for the vocabulary within
                        the trained CountVectorizer model.
     :param terms:      the maximum amount of terms shown during the explanation.
-    :param \**kwargs:  see below.
+    :param **kwargs:  see below.
 
     :Keyword Arguments:
         * *svd* -- SVD model used for unsupervised learning with KMeans
 
     :return:           str, a report of the model
-    """
+    '''
+    
     model = (next(e for n, e in model.steps if isinstance(e, base.SUPPORTED_ESTIMATORS))
              if isinstance(model, SkPipeline)
              else model)

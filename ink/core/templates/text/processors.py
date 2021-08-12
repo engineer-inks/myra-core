@@ -8,7 +8,7 @@ import os
 import logging
 from typing import List, Union, Callable, Optional, Dict
 
-from ..text import processors_parameters
+from ink.core.templates.core import processors
 from py4j.protocol import Py4JJavaError
 from pyspark.ml.feature import Tokenizer, StopWordsRemover, NGram, CountVectorizer, IDF
 from pyspark.ml.pipeline import Pipeline, PipelineModel
@@ -19,7 +19,7 @@ from ..text import (models,
 from ..text import datasets, functions as F2
 
 
-class Rawing(processors_parameters.Rawing, metaclass=abc.ABCMeta):
+class Rawing(processors.Rawing, metaclass=abc.ABCMeta):
     """Processor capable of tearing up transient data after processing it.
 
     """
@@ -83,11 +83,11 @@ class Rawing(processors_parameters.Rawing, metaclass=abc.ABCMeta):
         return x
 
 
-class Trusting(processors_parameters.Trusting, metaclass=abc.ABCMeta):
+class Trusting(processors.Trusting, metaclass=abc.ABCMeta):
     ...
 
 
-class Refining(processors_parameters.Refining, metaclass=abc.ABCMeta):
+class Refining(processors.Refining, metaclass=abc.ABCMeta):
     text_encoder: PipelineModel
 
     def infer_from_keywords(self,

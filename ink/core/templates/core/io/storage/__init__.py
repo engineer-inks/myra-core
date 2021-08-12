@@ -3,17 +3,16 @@ from functools import partial
 from typing import List
 from typing import Optional, Union
 
-from .base import (adapter,
+from ..base import (adapter,
                     split_protocol_path,
                     without_protocol,
                     join_protocol_path,
                     handle_error)
-from ink.core.templates.core import security
-
+from ... import security
 
 _ADAPTERS_AVAILABLE = {
-    'file': ('ink.core.templates.adapters.file_system', 'FileSystemStorageAdapter'),
-    'gs': ('ink.core.templates.adapters.google_cloud', 'GoogleCloudStorageAdapter')
+    'file': ('ink.core.templates.core.io.storage.adapters.file_system', 'FileSystemStorageAdapter'),
+    'gs': ('ink.core.templates.core.io.storage.adapters.google_cloud', 'GoogleCloudStorageAdapter')
 }
 _ADAPTERS = {}
 
