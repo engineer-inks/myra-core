@@ -1,8 +1,18 @@
 import argparse
 import logging
-from ink.core import main
 
 from . import generators, backend, consts
+
+"""DnA Core."""
+from ink.core.templates.core import (io,
+               datasets,
+               models,
+               analysis,
+               utils)
+from ink.core.templates.configs import spark, Config
+from ink.core.templates.core.io import storage
+from ink.core.templates.core.processors import *
+from ink.core.templates.core.testing import *
 
 DESCRIPTION = 'Core projects management tool.'
 ENV_PARAMS = {'nargs': '?', 'default': 'local', 'help': 'environment configuration used'}
