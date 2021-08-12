@@ -8,12 +8,12 @@ from .base import (adapter,
                     without_protocol,
                     join_protocol_path,
                     handle_error)
-from ink.core.templates.core import security
+from ink.core.forge.templates.core import security
 
 
 _ADAPTERS_AVAILABLE = {
-    'file': ('ink.core.templates.core.io.storage.adapters.file_system', 'FileSystemStorageAdapter'),
-    'gs': ('ink.core.templates.core.io.storage.adapters.google_cloud', 'GoogleCloudStorageAdapter')
+    'file': ('ink.core.forge.emplates.core.io.storage.adapters.file_system', 'FileSystemStorageAdapter'),
+    'gs': ('ink.core.forge.templates.core.io.storage.adapters.google_cloud', 'GoogleCloudStorageAdapter')
 }
 _ADAPTERS = {}
 

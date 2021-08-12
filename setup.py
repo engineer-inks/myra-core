@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 import os
 
-from setuptools import setup, find_namespace_packages
+from setuptools import setup
 
 PROJECT_DIR = os.path.dirname(__file__)
 
@@ -19,7 +19,7 @@ setup(name='ink-core-forge',
       entry_points={
           'console_scripts': ['core=ink.core.forge:main']
       },      
-      packages=find_namespace_packages(include=['ink.core.forge.*']),
+      packages=['ink.core.forge'],
       namespace_packages=['ink', 'ink.core'],
       install_requires=[d for d in DEPENDENCIES if '://' not in d],
       package_data={'ink.core.forge': ['templates/*']},

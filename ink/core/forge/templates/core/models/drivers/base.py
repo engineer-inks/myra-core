@@ -6,7 +6,7 @@ from typing import Optional, Union, List
 from pyspark.sql import functions as F
 
 from ...analysis.utils import correlatable_columns
-from ink.core.templates.configs import Config
+from ink.core.forge.templates.configs import Config
 from ...utils import valid_or_default, NamedEntityMixin
 
 FS = Optional[Union[str, List[str]]]

@@ -1,4 +1,4 @@
-from ink.core.templates.text import testing, datasets
+from ink.core.forge.templates.text import testing, datasets
 
 class SimpleIrisTest(testing.SparkTestCase):
     def setUp(self):

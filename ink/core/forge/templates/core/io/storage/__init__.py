@@ -11,8 +11,8 @@ from ..base import (adapter,
 from ... import security
 
 _ADAPTERS_AVAILABLE = {
-    'file': ('ink.core.templates.core.io.storage.adapters.file_system', 'FileSystemStorageAdapter'),
-    'gs': ('ink.core.templates.core.io.storage.adapters.google_cloud', 'GoogleCloudStorageAdapter')
+    'file': ('ink.core.forge.templates.core.io.storage.adapters.file_system', 'FileSystemStorageAdapter'),
+    'gs': ('ink.core.forge.templates.core.io.storage.adapters.google_cloud', 'GoogleCloudStorageAdapter')
 }
 _ADAPTERS = {}
 

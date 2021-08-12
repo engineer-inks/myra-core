@@ -4,7 +4,7 @@ import logging
 from . import generators, backend, consts
 
 """DnA Core."""
-from ink.core.templates.core import (io,
+from ink.core.forge.templates.core import (io,
                datasets,
                models,
                analysis,

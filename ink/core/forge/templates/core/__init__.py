@@ -6,7 +6,7 @@ from . import (io,
                models,
                analysis,
                utils)
-from ink.core.templates.configs import spark, Config
+from ink.core.forge.templates.configs import spark, Config
 from .io import storage
 from .processors import *
 from .testing import *

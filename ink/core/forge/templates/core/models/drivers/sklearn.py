@@ -15,7 +15,7 @@ from .base import Driver
 from .. import errors, functions
 from ..base import logistic_regressor_gs
 from ... import io
-from ink.core.templates.configs import spark, Config
+from ink.core.forge.templates.configs import spark, Config
 from ...utils import valid_or_default, is_list
 
 E = Callable[[str], BaseEstimator]

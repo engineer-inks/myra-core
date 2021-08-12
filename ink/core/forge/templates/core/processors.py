@@ -7,8 +7,8 @@ from typing import List, Optional, Union, Dict
 
 from pyspark.sql import functions as F
 
-from ink.core.templates.core import models, io, security
-from ink.core.templates import configs
+from ink.core.forge.templates.core import models, io, security
+from ink.core.forge.templates import configs
 from .utils import to_list, stopwatch, NamedEntityMixin
 
 I = Union[str, F.DataFrame, Dict[str, F.DataFrame]]

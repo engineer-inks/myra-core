@@ -4,7 +4,7 @@ from typing import Dict, Any, List, Optional
 from pyspark.sql import functions as F
 
 from .stream_adapter import StreamAdapter
-from ink.core.templates.configs import spark
+from ink.core.forge.templates.configs import spark
 
 ALLOWED_INPUT_FILE_FORMATS = ('.csv', '.json', '.parquet')
 DEFAULT_READING_OPTIONS = {

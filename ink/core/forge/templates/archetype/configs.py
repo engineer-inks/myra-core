@@ -1,6 +1,6 @@
 import os
 
-from ink.core.templates.configs import Config, Test
+from ink.core.forge.templates.configs import Config, Test
 
 HOME_DIR = os.path.expanduser('~')
 CONFIG_DIR = os.getenv('CONFIG_DIR', os.path.join(HOME_DIR, 'ink'))

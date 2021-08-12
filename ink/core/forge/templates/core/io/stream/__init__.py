@@ -14,9 +14,9 @@ S = Union[S, List[S]]
 
 
 _ADAPTERS_AVAILABLE = {
-    'mem': ('ink.core.templates.core.io.stream.adapters.memory', 'MemoryStreamAdapter'),
-    'file': ('ink.core.templates.core.io.stream.adapters.file', 'FileStreamAdapter'),
-    'bigquery': ('ink.core.templates.core.io.stream.adapters.big_query', 'BigQueryStreamAdapter')
+    'mem': ('ink.core.forge.templates.core.io.stream.adapters.memory', 'MemoryStreamAdapter'),
+    'file': ('ink.core.forge.templates.core.io.stream.adapters.file', 'FileStreamAdapter'),
+    'bigquery': ('ink.core.forge.templates.core.io.stream.adapters.big_query', 'BigQueryStreamAdapter')
 }
 _ADAPTERS = {}
 
@@ -36,7 +36,7 @@ def read(sources: S,
     ----------
     sources: str, list-like of str
         Path or list of paths to sources.
-    options: \**kwargs
+    options: **kwargs
         Used as options during the read operation.
         It will vary according to the type of source being read.
         If the data is already loaded in memory (pandas, numpy, DataFrame),
@@ -87,7 +87,7 @@ def write(df: F.DataFrame,
     filename: str
         location for the stream, a file topic or table name
 
-    options: \**kwargs
+    options: **kwargs
         Used as options during the write operation.
         It will vary according to the type of source being written.
 
