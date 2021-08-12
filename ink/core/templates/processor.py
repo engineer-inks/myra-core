@@ -1,6 +1,6 @@
 from pyspark.sql import DataFrame, functions as F
 
-import dextra.dna.core as C
+import ink.core.templates.core as C
 
 
 class Rawing(C.processors.Rawing):

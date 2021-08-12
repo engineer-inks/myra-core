@@ -2,6 +2,7 @@ import os
 import logging
 from argparse import ArgumentParser
 
+import ink.core.templates.core as C
 import ink.core.templates.archetype as ARCHETYPE_INITIAL
 
 

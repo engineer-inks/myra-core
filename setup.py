@@ -10,7 +10,7 @@ INFO = dict((l.strip().split('=') for l in INFO))
 
 DEPENDENCIES = open(os.path.join(PROJECT_DIR, 'requirements.txt')).readlines()
 
-setup(name='myra-core',
+setup(name='ink-core',
       version=INFO['version'],
       author=INFO['author'],
       author_email=INFO['author_email'],

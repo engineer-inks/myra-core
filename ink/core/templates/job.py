@@ -1,8 +1,7 @@
 import logging
 from argparse import ArgumentParser
 
-import dextra.dna.core as C
-import dextra.dna.ARCHETYPE as ARCHETYPE_INITIAL
+import ink.core.templates.archetype as ARCHETYPE_INITIAL
 
 
 def parse_args():
