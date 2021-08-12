@@ -9,6 +9,7 @@ from pyspark.sql.types import Row
 from . import utils
 import findspark
 
+
 def spark(mode='default') -> SparkSession:
     """Retrieve current spark session.
 
