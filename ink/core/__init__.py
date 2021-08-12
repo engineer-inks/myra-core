@@ -3,12 +3,12 @@ import logging
 
 from . import generators, backend, consts
 
-DESCRIPTION = 'DnA projects management tool.'
+DESCRIPTION = 'Core projects management tool.'
 ENV_PARAMS = {'nargs': '?', 'default': 'local', 'help': 'environment configuration used'}
 VERBOSITY_CHOICES = [v.lower() for v in logging._nameToLevel]
 
 
-def dna_parser():
+def core_parser():
     p = argparse.ArgumentParser(description=DESCRIPTION)
     p.add_argument('--env', default='local', help='environment configuration used')
 
@@ -18,7 +18,7 @@ def dna_parser():
 
     s = p.add_subparsers()
 
-    g = s.add_parser('create', help='create DnA artifacts')
+    g = s.add_parser('create', help='create core artifacts')
     g.add_argument('artifact', help='artifact to be created', choices=generators.GENERATORS.keys())
     g.add_argument('name', help='name of the creating artifact')
     g.add_argument('-t', '--to', default=None, help='location of the artifact')
@@ -26,7 +26,7 @@ def dna_parser():
     g.add_argument('--arch-version', default='master', help='archetype version used (tag or branch)')
     g.set_defaults(operation=lambda args, _: generators.adapter(args).create())
 
-    u = s.add_parser('build', help='build a DnA project')
+    u = s.add_parser('build', help='build a core project')
     u.add_argument('env', **ENV_PARAMS)
     u.set_defaults(operation=lambda args, _: backend.adapter(args.env).build())
 
@@ -38,7 +38,7 @@ def dna_parser():
     u.add_argument('env', **ENV_PARAMS)
     u.set_defaults(operation=lambda args, _: backend.adapter(args.env).start())
 
-    u = s.add_parser('explore', help='explore a DnA environment with jupyter')
+    u = s.add_parser('explore', help='explore a core environment with jupyter')
     u.add_argument('env', **ENV_PARAMS)
     u.set_defaults(operation=lambda args, _: backend.adapter(args.env).explore())
 
@@ -69,7 +69,7 @@ def dna_parser():
 
 
 def main():
-    args, unknown = dna_parser().parse_known_args()
+    args, unknown = core_parser().parse_known_args()
 
     level = (getattr(logging, args.verbosity.upper(), None) if args.verbosity else
              logging.ERROR if args.quiet else
