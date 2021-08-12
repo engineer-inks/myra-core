@@ -1,5 +1,6 @@
 import argparse
 import logging
+from ink.core import main
 
 from . import generators, backend, consts
 
