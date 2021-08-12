@@ -21,5 +21,5 @@ setup(name='ink-core',
       },      
       packages=find_namespace_packages(include=['ink.core.*']),
       install_requires=[d for d in DEPENDENCIES if '://' not in d],
-      package_data={'ink.core': ['templates/*']},
+      package_data={'ink': ['core/*']},
       zip_safe=False)
