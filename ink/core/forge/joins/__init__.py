@@ -1,2 +1,2 @@
 from . import archetype, core, text
-from ink.core.forge.templates import main
+from ink.core.forge import main

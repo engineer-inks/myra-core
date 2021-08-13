@@ -2,7 +2,7 @@ import argparse
 import logging
 
 from . import generators, backend, consts
-
+from ink.core.forge import main
 
 DESCRIPTION = 'Core projects management tool.'
 ENV_PARAMS = {'nargs': '?', 'default': 'local', 'help': 'environment configuration used'}
