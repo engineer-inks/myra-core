@@ -19,7 +19,7 @@ setup(name='ink-core-forge',
       entry_points={
           'console_scripts': ['core=ink.core.forge:main']
       },
-      packages=find_namespace_packages(include=['ink.core.forge.*']),
+      packages=find_namespace_packages(include=['ink.core.forge.joins']),
       namespace_packages=['ink', 'ink.core'],
       install_requires=[d for d in DEPENDENCIES if '://' not in d],
       package_data={'ink.core.forge': ['templates/*']},
