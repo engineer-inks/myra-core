@@ -5,7 +5,7 @@ from pyspark.ml.util import DefaultParamsWritable, DefaultParamsReadable
 from pyspark.sql import functions as F
 
 from ..utils import load_spacy_model, lemmatize
-from ink.core.forge.templates.configs import spark
+from ink.core.forge.joins.core.configs import spark
 
 class SPACY:
     MODEL = 'pt_core_news_sm'

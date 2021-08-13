@@ -14,9 +14,9 @@ S = Union[S, List[S]]
 
 
 _ADAPTERS_AVAILABLE = {
-    'mem': ('ink.core.forge.templates.core.io.stream.adapters.memory', 'MemoryStreamAdapter'),
-    'file': ('ink.core.forge.templates.core.io.stream.adapters.file', 'FileStreamAdapter'),
-    'bigquery': ('ink.core.forge.templates.core.io.stream.adapters.big_query', 'BigQueryStreamAdapter')
+    'mem': ('ink.core.forge.joins.core.io.stream.adapters.memory', 'MemoryStreamAdapter'),
+    'file': ('ink.core.forge.joins.core.io.stream.adapters.file', 'FileStreamAdapter'),
+    'bigquery': ('ink.core.forge.joins.core.io.stream.adapters.big_query', 'BigQueryStreamAdapter')
 }
 _ADAPTERS = {}
 

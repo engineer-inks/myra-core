@@ -2,7 +2,7 @@ import os
 import logging
 from argparse import ArgumentParser
 
-import ink.core.forge.templates.archetype as ARCHETYPE_INITIAL
+import ink.core.forge.joins.archetype as ARCHETYPE_INITIAL
 
 
 def parse_args():

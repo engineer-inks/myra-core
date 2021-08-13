@@ -6,7 +6,7 @@ from typing import List
 
 import numpy as np
 
-from ..utils import *
+from ink.core.forge.joins.core.utils import *
 
 
 def names_distance(a: str, b: str) -> int:

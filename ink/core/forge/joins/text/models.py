@@ -9,8 +9,8 @@ from pyspark.ml.pipeline import Pipeline, PipelineModel
 from sklearn.model_selection import GridSearchCV
 from sklearn.pipeline import Pipeline as SkPipeline
 
-from ink.core.forge.templates.core.io.stream import merge
-from ink.core.forge.templates.core.models import base
+from ink.core.forge.joins.core.io.stream import merge
+from ink.core.forge.joins.core.models import base
 
 from . import transformers, utils
 

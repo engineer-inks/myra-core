@@ -16,7 +16,7 @@ import numpy as np
 from pyspark.sql import types as T, functions as F
 from pyspark.sql.column import Column
 
-from .. import utils
+from ink.core.forge.joins.text import utils
 
 
 def clean(col: Union[Column, str]) -> Column:

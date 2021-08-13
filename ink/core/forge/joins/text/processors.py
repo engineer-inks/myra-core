@@ -8,7 +8,7 @@ import os
 import logging
 from typing import List, Union, Callable, Optional, Dict
 
-from ink.core.forge.templates.core import processors
+from ink.core.forge.joins.core import processors
 from py4j.protocol import Py4JJavaError
 from pyspark.ml.feature import Tokenizer, StopWordsRemover, NGram, CountVectorizer, IDF
 from pyspark.ml.pipeline import Pipeline, PipelineModel

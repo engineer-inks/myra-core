@@ -4,9 +4,8 @@ from unittest import TestCase
 
 from pyspark.sql import SparkSession, DataFrame, Column, functions as F
 
-
-from ink.core.forge.templates import configs
-from ink.core.forge.templates.configs import Config
+from ink.core.forge.joins.core.configs import Config
+from ink.core.forge.joins.core import configs
 from .utils import to_list
 
 

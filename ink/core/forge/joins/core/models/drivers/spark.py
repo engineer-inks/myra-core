@@ -7,7 +7,7 @@ from pyspark.sql import functions as F
 from .base import FS, Driver, extract_features
 from .. import errors
 from ...analysis.utils import is_class
-from ink.core.forge.templates.configs import Config
+from ink.core.forge.joins.core.configs import Config
 from ...utils import is_list, valid_or_default
 
 
