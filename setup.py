@@ -22,5 +22,5 @@ setup(name='ink-core-forge',
       packages=['ink.core.forge'],
       namespace_packages=['ink', 'ink.core'],
       install_requires=[d for d in DEPENDENCIES if '://' not in d],
-      package_data={'ink.core.forge': ['templates/*']},
+      package_data={'ink.core.forge': ['forge/*']},
       zip_safe=False)
