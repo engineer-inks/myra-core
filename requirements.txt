@@ -3,7 +3,7 @@ wheel
 PyYAML
 pyspark
 findspark
-deltalake
+# deltalake
 
 ## Normal libs
 numpy
