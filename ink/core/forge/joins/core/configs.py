@@ -27,7 +27,7 @@ def spark(mode='default') -> SparkSession:
                 .enableHiveSupport()
                 .getOrCreate())
     elif mode == 'deltalake':
-        findspark.init("/opt/conda/lib/python3.8/site-packages/pyspark")
+        findspark.init("/opt/conda/lib/python3.7/site-packages/pyspark")
         return SparkSession.builder \
             .config("spark.jars.packages", "io.delta:delta-core_2.12:0.7.0") \
             .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension") \
