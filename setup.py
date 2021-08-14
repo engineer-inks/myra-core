@@ -15,7 +15,7 @@ setup(name='ink-core-forge',
       author=INFO['author'],
       author_email=INFO['author_email'],
       url=INFO['url'],
-      python_requires='>=3.8',
+      python_requires='>=3.7',
       entry_points={
           'console_scripts': ['core=ink.core.forge:main']
       },
