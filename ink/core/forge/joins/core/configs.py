@@ -31,12 +31,12 @@ def spark(mode='default') -> SparkSession:
             .config("spark.jars.packages", "io.delta:delta-core_2.12:0.7.0") \
             .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension") \
             .config("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog") \
-            .config("spark.databricks.delta.schema.autoMerge.enabled", "true") \
             .getOrCreate()
     else:
         raise ValueError(f'Illegal value "{mode}" mode parameter. '
                          'It should be either "default", "test" or "deltalake".')
 
+### .config("spark.databricks.delta.schema.autoMerge.enabled", "true") \
 
 class Config:
     """Encapsulates all config properties for an execution.
