@@ -1,6 +1,6 @@
 [run]
-source = ink.core.templates
-include = ink.core.templates*
+source = ink.core.forge.templates
+include = ink.core.forge.templates*
 branch = True
 
 [report]

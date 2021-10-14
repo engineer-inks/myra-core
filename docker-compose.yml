@@ -12,7 +12,7 @@ services:
     env_file:
       - config/$ENV/.env
     volumes:
-      - .:/opt/dna/text
+      - .:/opt/dna/ink
       - ./config/$ENV:/home/jovyan/dna
       - ./datalake:/datalake
       - ./datalake/scikit_learn_data:/home/jovyan/scikit_learn_data
