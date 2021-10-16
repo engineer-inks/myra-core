@@ -1,0 +1,9 @@
+lakes:
+  transient: 'gs://dna_archetype/transient'
+  raw: 'gs://dna_archetype/raw'
+  trusted: 'gs://dna_archetype/trusted'
+  refined: 'gs://dna_archetype/refined'
+  models: 'gs://dna_archetype/models'
+  backup: 'gs://dna_archetype/backup'
+  secrets: 'gs://dna_archetype/secrets'
+  config: 'gs://dna_archetype/config'
