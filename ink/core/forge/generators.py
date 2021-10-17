@@ -164,7 +164,7 @@ class JobFull(Job):
 
 
 class Processor(TemplateGenerator):
-    DIRS = 'myra/dna/{SERVICE}/processors'
+    DIRS = 'ink/core/forge/{SERVICE}/processors'
 
 
 class Test(TemplateGenerator):
