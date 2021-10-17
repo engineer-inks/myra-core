@@ -33,7 +33,7 @@ def load_config(env_file: str) -> C:
 
 
 def assert_is_dna_project(target):
-    if not os.path.exists(os.path.join(target, 'ink', 'core')):
+    if not os.path.exists(os.path.join(target, 'myra')):
         raise RuntimeError('DnA project not found.\nMake sure your '
                            'current directory is a valid project.')
 
